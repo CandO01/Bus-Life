@@ -13,6 +13,11 @@ html, body {
 body::-webkit-scrollbar {
   display: none;
 }
+.site-wrapper{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh
+}
 
 body {
   -ms-overflow-style: none;
@@ -49,10 +54,27 @@ header a:hover {
     color: #161616;
     text-decoration: underline;
 }
+main{
+    margin-bottom: 84px;
+}
+footer{
+  color: #AAAAAA;
+  background-color: #161616;
+  height: 74px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  margin-top: auto
+}
 .nav-link{
-    font-weight: bold;
+     font-weight: bold;
      text-decoration: underline;
      color: red;
+}
+.host-link{
+    color: green;
+    font-weight: bold;
 }
 
 .link-button {
@@ -298,13 +320,57 @@ i[class*='van-type-'] {
     text-decoration: underline;
     font-weight: 600;
 }
-footer{
-  text-align: center;
-  color: white;
-  background-color: black;
-  padding: 10px 0;
-  margin-top: 20px;
+.host-van-link-wrapper {
+    color: unset;
+    text-decoration: unset;
 }
+
+.host-vans-list {
+    padding-inline: 26px;
+}
+
+.host-vans-title {
+    padding-inline: 26px;
+}
+
+.host-van-single, .van-detail-container {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    margin-bottom: 15px;
+    padding-block: 18px;
+    padding-left: 24px;
+}
+.vandetail-big-container{
+    background-color: white;
+    margin-bottom: 15px;
+    padding-block: 18px;
+    padding-left: 24px;
+}
+
+.host-van-single > img,
+.van-detail-container > img {
+    height: 70px;
+    border-radius: 5px;
+    margin-right: 17px;
+}
+
+.host-van-info h3 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-block: 10px;
+}
+
+.host-van-info p {
+    margin-block: 10px;
+}
+
+.van-detail-container > img {
+    height: 100px;
+    border-radius: 5px;
+    margin-right: 17px;
+}
+
 
 @media (max-width: 600px) {
   header {

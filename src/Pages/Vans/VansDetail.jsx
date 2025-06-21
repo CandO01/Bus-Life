@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 
 
 function VansDetail() {
-  const [vans, setVans] = useState(null)
+  const [vans, setVans] = useState([])
 
 const params = useParams()
 
@@ -14,26 +14,36 @@ const params = useParams()
       const res = await fetch(`http://localhost:8254/api/vans/${params.id}`)
       const data = await res.json()
       setVans(data)
+      console.log(data.map((item)=>item.name))
     }
 
     vanDetailing()
   }, [params.id])
+
+    const vansElement = vans.map((vanNames)=>{
+      return(
+        <div key={vanNames.id} className="van-detail">
+          <img src={vanNames.imageUrl} alt="" />
+          <i className={`van-type ${vanNames.type} selected`}>{vanNames.type}</i>
+          <h2>{vanNames.name}</h2>
+          <p className='van-price'><span>${vanNames.price}</span>/day</p>
+          <p>{vanNames.description}</p>
+          <button className='link-button'>Rent this van</button>
+      </div>
+      )
+    })
+
   return (
     <div className='van-detail-conatiner'>
       <Link to='/vans' style={{display:'flex', alignItems:'center', gap: 10}}>
         <IoMdArrowBack /> 
         <p>back to vans</p>
       </Link>
-
-      {vans ? (<div className="van-detail">
-        <img src={vans.imageUrl} alt="" />
-        <i className={`van-type ${vans.type} selected`}>{vans.type}</i>
-        <h2>{vans.name}</h2>
-        <p className='van-price'><span>${vans.price}</span>/day</p>
-        <p>{vans.description}</p>
-        <button className='link-button'>Rent this van</button>
-      </div>
-      ) : ( <h1>Loading....</h1>)}
+      {vans.length > 0 ? (<div>
+        {vansElement}
+      </div>): (
+        <h1>Loading...</h1>
+      ) }
     </div>
 
 

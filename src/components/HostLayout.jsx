@@ -4,9 +4,27 @@ function HostLayout() {
   return (
     <>
       <nav className='host-nav'>
-        <NavLink to='.'>Dashboard</NavLink>
-        <NavLink to='income'>Income</NavLink>
-        <NavLink to='reviews'>Reviews</NavLink>
+
+        <NavLink 
+          to='.'
+          className={({isClicked})=>isClicked ? 'host-link' : null}
+        >Dashboard</NavLink>
+
+        <NavLink 
+          to='income'
+          className={({isClicked})=>isClicked ? 'host-link' : null}
+        >Income</NavLink>
+
+        <NavLink 
+          to='vans'
+          className={({isClicked})=>isClicked ? 'host-link' : null}
+        >Vans</NavLink>
+
+        <NavLink 
+          to='reviews'
+          className={({isClicked})=>isClicked ? 'host-link' : null}
+        >Reviews</NavLink>
+
       </nav>
       <Outlet />
     </>
