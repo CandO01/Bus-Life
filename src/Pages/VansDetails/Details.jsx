@@ -8,7 +8,7 @@ function Details() {
 
   useEffect(()=>{
     async function vanInfo() {
-      const res = await fetch(`http://localhost:8254/api/host/vans/${params.id}`)
+      const res = await fetch(`https://vanlife-api-8k5o.onrender.com/api/host/vans/${params.id}`)
       const data = await res.json()
       setInfo(data)
     }
