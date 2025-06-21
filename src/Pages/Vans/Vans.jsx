@@ -7,7 +7,7 @@ export default function Vans(){
   useEffect(()=>{
       async function vansDataLife() {
       try {
-        const res = await fetch('http://localhost:8254/api/vans');
+        const res = await fetch('https://vanlife-api-8k5o.onrender.com/api/vans');
         if (!res.ok) throw new Error('Fetch failed');
         const data = await res.json();
             setVans(data)
