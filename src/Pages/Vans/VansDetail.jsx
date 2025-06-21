@@ -11,7 +11,7 @@ const params = useParams()
 
   useEffect(()=>{
     async function vanDetailing() {
-      const res = await fetch(`http://localhost:8254/api/vans/${params.id}`)
+      const res = await fetch(`https://vanlife-api-8k5o.onrender.com/api/vans/${params.id}`)
       const data = await res.json()
       setVans(data)
       console.log(data.map((item)=>item.name))
