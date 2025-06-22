@@ -72,9 +72,10 @@ footer{
      text-decoration: underline;
      color: red;
 }
-.host-link{
-    color: green;
+.host-link a{
     font-weight: bold;
+    text-decoration: underline;
+    color: #161616;
 }
 
 .link-button {
@@ -308,14 +309,18 @@ i[class*='van-type-'] {
     display: flex;
 }
 
-.host-nav a {
+.host-nav a, .vans-infolink a {
     text-decoration: none;
     color: #4D4D4D;
     font-weight: 500;
     padding: 5px 20px;
 }
+.vandetail-infolink{
+    margin-bottom: 20px;
+}
 
-.host-nav a:hover {
+.host-nav a:hover,
+.vans-infolink a:hover {
     color: #161616;
     text-decoration: underline;
     font-weight: 600;

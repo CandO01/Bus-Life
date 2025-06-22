@@ -1,5 +1,5 @@
 import React,{ useState, useEffect } from 'react'
-import { Link, Outlet } from 'react-router-dom'
+import { Link, NavLink, Outlet } from 'react-router-dom'
 import { IoMdArrowBack } from "react-icons/io";
 import { useParams } from 'react-router-dom'
 
@@ -8,6 +8,12 @@ function HostVanDetails() {
 
   const params = useParams()
   
+  const activeStyles = {
+        fontWeight: "bold",
+        textDecoration: "underline",
+        color: "#161616"
+    }
+
   useEffect(()=>{
     async function vanDetails() {
       const res = await fetch(`http://localhost:8254/api/host/vans/${params.id}`)
@@ -45,10 +51,20 @@ function HostVanDetails() {
         <div className='vandetail-big-container'>
           {hostVanDetails}
 
-          <div style={{display:'flex', alignItems: 'center', gap: 10}}>
-              <Link to='.'>Details</Link>
-              <Link to='pricing'>Pricing</Link>
-              <Link to='photos'>Photos</Link>
+          <div className='vans-infolink vandetail-infolink'>
+              <NavLink 
+                to='.'
+                end
+                style={({isActive})=>isActive ? activeStyles : null}
+                >Details</NavLink>
+              <NavLink 
+                to='pricing'
+                style={({isActive})=>isActive ? activeStyles : null}
+                >Pricing</NavLink>
+              <NavLink 
+                to='photos'
+                style={({isActive})=>isActive ? activeStyles : null}
+                >Photos</NavLink>
           </div>
 
           <Outlet />
