@@ -16,7 +16,7 @@ function HostVanDetails() {
 
   useEffect(()=>{
     async function vanDetails() {
-      const res = await fetch(`http://localhost:8254/api/host/vans/${params.id}`)
+      const res = await fetch(`https://vanlife-api-8k5o.onrender.com/api/host/vans/${params.id}`)
       const data = await res.json()
       setVanBus(data)
       // console.log(data)
