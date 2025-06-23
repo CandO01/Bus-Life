@@ -2,12 +2,20 @@ import React,{ useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { IoMdArrowBack } from "react-icons/io";
 import { useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom'
 
 
 function VansDetail() {
   const [vans, setVans] = useState([])
 
 const params = useParams()
+
+const location = useLocation()
+                        //this is called optional chaining
+const searchParams = location.state?.search || ""
+const type = location.state?.type || "all"
+
+// const type = new URLSearchParams(searchParams).get('type')
 
   useEffect(()=>{
     async function vanDetailing() {
@@ -35,9 +43,13 @@ const params = useParams()
 
   return (
     <div className='van-detail-conatiner'>
-      <Link to='/vans' style={{display:'flex', alignItems:'center', gap: 10}}>
+      <Link 
+        to={`..?${searchParams}`} 
+        relative='path'
+        // state={searchParams ? {search: searchParams} : null}
+        style={{display:'flex', alignItems:'center', gap: 10}}>
         <IoMdArrowBack /> 
-        <p>back to vans</p>
+        <p>back to {type} vans</p>
       </Link>
       {vans.length > 0 ? (<div>
         {vansElement}

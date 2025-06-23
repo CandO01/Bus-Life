@@ -1,14 +1,15 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, Link } from 'react-router-dom'
+import { FaRegCircleUser } from "react-icons/fa6";
 function Header() {
   return (
       <header>
-          <NavLink className="site-logo" to="/">#VanLife</NavLink>
+          <NavLink className="site-logo" to="/">#CandO</NavLink>
           <nav>
-            <NavLink 
+            {/* <NavLink 
               to='/'
               className={({isActive})=>isActive ? 'nav-link' : null}
-            >Home</NavLink>
+            >Home</NavLink> */}
             <NavLink 
               to='/host'
               className={({isActive})=>isActive ? 'nav-link' : null}
@@ -21,6 +22,9 @@ function Header() {
               to='/vans'
               className={({isActive})=>isActive ? 'nav-link' : null}
             >Vans</NavLink>
+            <Link to='login'>
+              <FaRegCircleUser />
+            </Link>
           </nav>
       </header>
   )

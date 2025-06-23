@@ -23,7 +23,7 @@ function HostVansList() {
 
   const hostVanEls = van.map((vanItem)=>(
                     <Link
-                      to={`/host/vans/${vanItem.id}`}
+                      to={`${vanItem.id}`}
                       key={vanItem.id}
                       className='host-van-link-wrapper'
                     >

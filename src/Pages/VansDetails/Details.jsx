@@ -18,10 +18,10 @@ function Details() {
     const vanInfoDetail = info.map((detail)=>{
       return(
         <div className='vaninfo-container' key={detail.id}>
-          <p>Name: <span>{detail.name}</span></p>
-          <p>Category: <span>{detail.type}</span></p>
-          <p>Description: <span>{detail.description}</span></p>
-          <p>Visibility: <span>{detail.visibility}</span></p>
+          <p><strong>Name:</strong> <span>{detail.name}</span></p>
+          <p><strong>Category:</strong> <span>{detail.type}</span></p>
+          <p><strong>Description:</strong> <span>{detail.description}</span></p>
+          <p><strong>Visibility:</strong> <span>{detail.visibility}</span></p>
         </div>
       )
     })

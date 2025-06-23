@@ -18,6 +18,9 @@ import HostVanDetails from "./Pages/Host/HostVanDetails"
 import Details from './Pages/VansDetails/Details.jsx'
 import Pricing from './Pages/VansDetails/Pricing.jsx'
 import Photos from './Pages/VansDetails/Photos.jsx'
+import NotFound from './Pages/NotFound.jsx'
+import Login from './Pages/Login.jsx'
+import Auth from './Pages/Auth.jsx'
 
 function App() {
   return (
@@ -29,25 +32,32 @@ function App() {
         <Route path="vans" element={<Vans />} />
         <Route path="vans/:id" element={<VansDetail />} />
 
-        {/* Host Nested Routes */}
-        <Route path='host' element={<HostLayout />}>
-          <Route index element={<Dashboard />} />
-          {/* {Income Nested Routes} */}
-            <Route path="income" element={<Income />}>
-              <Route path='yesterday-income' element={<Yesterday />} />
-              <Route path='today-income' element={<Today />} />
-              <Route path='tomorrow-income' element={<Tomorrow />} />
+        {/* {For login form} */}
+        <Route path='login' element={<Login />} />
+
+        {/* {Authentication route for the van host} */}
+        <Route element={<Auth />}>
+          {/* Host Nested Routes */}
+          <Route path='host' element={<HostLayout />}>
+            <Route index element={<Dashboard />} />
+            {/* {Income Nested Routes} */}
+              <Route path="income" element={<Income />}>
+                <Route path='yesterday-income' element={<Yesterday />} />
+                <Route path='today-income' element={<Today />} />
+                <Route path='tomorrow-income' element={<Tomorrow />} />
+              </Route>
+            <Route path="reviews" element={<Reviews />} />
+            <Route path="vans" element={<HostVansList />} />
+            {/* {VanDetails nested Route} */}
+            <Route path="vans/:id" element={<HostVanDetails />}>
+              <Route index element={<Details />} />
+              <Route path='pricing' element={<Pricing />} />
+              <Route path='photos' element={<Photos />} />
             </Route>
-          <Route path="reviews" element={<Reviews />} />
-          <Route path="vans" element={<HostVansList />} />
-          {/* {VanDetails nested Route} */}
-          <Route path="vans/:id" element={<HostVanDetails />}>
-            <Route index element={<Details />} />
-            <Route path='pricing' element={<Pricing />} />
-            <Route path='photos' element={<Photos />} />
           </Route>
         </Route>
-    
+        {/* {Page not foound route} */}
+        <Route path='*' element={<NotFound />} />
       </Route>
     </Routes>
   </BrowserRouter>
