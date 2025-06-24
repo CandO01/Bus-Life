@@ -8,9 +8,31 @@ function Login() {
 
  //function to handle the submit button
 
- function handleSubmit(e){
+ async function handleSubmit(e){
     e.preventDefault()
-    console.log('Submitted')
+    try {
+     
+     const url = 'https://vanlife-api-8k5o.onrender.com/login'
+     const options =  {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(loginFormData),
+    }
+     
+    const res = await fetch(url, options);
+
+    const data = await res.json();
+
+    if (res.ok) {
+      console.log('✅ Success:', data);
+      window.location.href = data.redirect; // Or use React Router's navigate('/host')
+    } else {
+      console.error('❌ Error:', data.error);
+      alert(data.error);
+    }
+  } catch (err) {
+    console.error('⛔ Network Error', err);
+  }
  }
 
  function handleChange(e){
