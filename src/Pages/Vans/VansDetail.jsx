@@ -22,7 +22,7 @@ function VansDetail() {
           throw new Error('Failed to fetch van details')
         }
         const data = await res.json()
-        setVan(data.vans) // ✅ Fix: access the `vans` key from the API response
+        setVan(data.vans) 
       } catch (err) {
         setError(err.message)
       } finally {
