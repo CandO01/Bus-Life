@@ -22,7 +22,7 @@ function VansDetail() {
           throw new Error('Failed to fetch van details')
         }
         const data = await res.json()
-        setVan(data.vans) 
+        setVan(data) // ✅ correct
       } catch (err) {
         setError(err.message)
       } finally {
@@ -33,17 +33,9 @@ function VansDetail() {
     fetchVanDetail()
   }, [params.id])
 
-  if (loading) {
-    return <h2>Loading...</h2>
-  }
-
-  if (error) {
-    return <h2 style={{ color: 'red' }}>{error}</h2>
-  }
-
-  if (!van) {
-    return <h2>No van found</h2>
-  }
+  if (loading) return <h2>Loading...</h2>
+  if (error) return <h2 style={{ color: 'red' }}>{error}</h2>
+  if (!van) return <h2>No van found</h2>
 
   return (
     <div className='van-detail-container'>
