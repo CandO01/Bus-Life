@@ -41,12 +41,12 @@ export default function Vans(){
 
      //handling loading
      if(loading){
-      return <h1 aria-live='polite'>Loading</h1>
+      return <h3 aria-live='polite'>Loading</h3>
      }
 
      //handling errors
      if(error){
-      return <h1 aria-live='assertive'>There is an error: {error.message}</h1>
+      return <h3 aria-live='assertive'>There is an error: {error.message}</h3>
      }
 
   return(
