@@ -7,7 +7,7 @@ function VansDetail() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
-  const { id } = useParams()
+  const params = useParams()
   const location = useLocation()
 
   const searchParams = location.state?.search || ""
@@ -17,12 +17,12 @@ function VansDetail() {
     async function fetchVanDetail() {
       setLoading(true)
       try {
-        const res = await fetch(`https://vanlife-api-8k5o.onrender.com/api/vans/${id}`)
+        const res = await fetch(`https://vanlife-api-8k5o.onrender.com/api/vans/${params.id}`)
         if (!res.ok) {
           throw new Error('Failed to fetch van details')
         }
         const data = await res.json()
-        setVan(data)
+        setVan(data.vans) // ✅ Fix: access the `vans` key from the API response
       } catch (err) {
         setError(err.message)
       } finally {
@@ -31,7 +31,7 @@ function VansDetail() {
     }
 
     fetchVanDetail()
-  }, [id])
+  }, [params.id])
 
   if (loading) {
     return <h2>Loading...</h2>
