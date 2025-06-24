@@ -8,8 +8,7 @@ function Login() {
 
  //function to handle the submit button
 
- async function handleSubmit(e){
-    e.preventDefault()
+ async function handleSubmit(){
     try {
      
      const url = 'https://vanlife-api-8k5o.onrender.com/login'
