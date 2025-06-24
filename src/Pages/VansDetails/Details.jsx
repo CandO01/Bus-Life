@@ -10,21 +10,20 @@ function Details() {
     async function vanInfo() {
       const res = await fetch(`https://vanlife-api-8k5o.onrender.com/api/host/vans/${params.id}`)
       const data = await res.json()
+      console.log(data)
       setInfo(data)
     }
     vanInfo();
   },[params.id])
 
-    const vanInfoDetail = info.map((detail)=>{
-      return(
-        <div className='vaninfo-container' key={detail.id}>
-          <p><strong>Name:</strong> <span>{detail.name}</span></p>
-          <p><strong>Category:</strong> <span>{detail.type}</span></p>
-          <p><strong>Description:</strong> <span>{detail.description}</span></p>
-          <p><strong>Visibility:</strong> <span>{detail.visibility}</span></p>
-        </div>
-      )
-    })
+    const vanInfoDetail = 
+                  <div className='vaninfo-container' key={info.id}>
+                    <p><strong>Name:</strong> <span>{info.name}</span></p>
+                    <p><strong>Category:</strong> <span>{info.type}</span></p>
+                    <p><strong>Description:</strong> <span>{info.description}</span></p>
+                    <p><strong>Visibility:</strong> <span>{info.visibility}</span></p>
+                  </div>
+      
 
   return (
     <>

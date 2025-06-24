@@ -24,18 +24,15 @@ function HostVanDetails() {
     vanDetails();
   }, [params.id])
 
-  const hostVanDetails = vanBus.map((vanbus)=>{
-    return(
-          <div key={vanbus.id} className='van-detail-container'>
-            <img src={vanbus.imageUrl} alt={vanbus.name} />
+  const hostVanDetails = 
+          <div key={vanBus.id} className='van-detail-container'>
+            <img src={vanBus.imageUrl} alt={vanBus.name} />
             <div className='van-detail-inner-container'>
-              <i className={`van-type van-type${vanbus.type}`}>{vanbus.type}</i>
-              <h2>{vanbus.name}</h2>
-              <p>${vanbus.price}<span>/day</span></p>
+              <i className={`van-type van-type${vanBus.type}`}>{vanBus.type}</i>
+              <h2>{vanBus.name}</h2>
+              <p>${vanBus.price}<span>/day</span></p>
             </div>
           </div>
-    )
-  })
 
   return (
     <section>

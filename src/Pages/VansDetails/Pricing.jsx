@@ -15,13 +15,11 @@ function Pricing() {
     vanPrice();
   }, [params.id])
 
-  const vanPricesEl = price.map((prices)=>{
-    return (
-      <div key={prices.id}>
-        <h2>${prices.price}<span>/day</span></h2>
+  const vanPricesEl = 
+      <div key={price.id}>
+        <h2>${price.price}<span>/day</span></h2>
       </div>
-    )
-  })
+  
   return (
     <>
       {vanPricesEl}

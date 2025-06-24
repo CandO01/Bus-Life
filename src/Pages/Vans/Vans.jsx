@@ -41,17 +41,17 @@ export default function Vans(){
 
      //handling loading
      if(loading){
-      return <h1 aria-live='polite'>Loading</h1>
+      return <h2 aria-live='polite'>Loading</h2>
      }
 
      //handling errors
      if(error){
-      return <h1 aria-live='assertive'>There is an error: {error.message}</h1>
+      return <h2 aria-live='assertive'>There is an error: {error.message}</h2>
      }
 
   return(
     <>
-    <h1 style={{textAlign: 'center'}}>Explore our van options</h1>
+    <h3 style={{textAlign: 'center'}}>Explore our van options</h3>
     <div style={{display: 'flex', gap: 10, alignItems: 'center', justifyContent: 'space-evenly'}}>
 
       <button  

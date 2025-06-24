@@ -14,13 +14,11 @@ function Photos() {
     vanImages();
   },[params.id])
 
-  const vanImgElement = vanImg.map((images)=>{
-    return (
-      <div key={images.id}>
-        <img style={{height: 100}} src={images.imageUrl} alt={images.name} />
+  const vanImgElement = 
+      <div key={vanImg.id}>
+        <img style={{height: 100}} src={vanImg.imageUrl} alt={vanImg.name} />
       </div>
-    )
-  })
+   
   return (
     <>
       {vanImgElement}
