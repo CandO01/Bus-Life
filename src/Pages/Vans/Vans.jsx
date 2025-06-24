@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom'
 
 export default function Vans() {
   const [vans, setVans] = useState([])
@@ -22,7 +22,7 @@ export default function Vans() {
           }
         }
         const data = await res.json()
-        setVans(data)
+        setVans(data.vans)
       } catch (err) {
         setError(err)
       } finally {
@@ -89,7 +89,7 @@ export default function Vans() {
               aria-label={`View details for ${van.name} priced at $${van.price} per day`}
             >
               <div className="inner-div">
-                <img className='van-image' src={van.imageUrl} alt={van.name || "Van Image"} />
+                <img className='van-image' src={van.imageUrl} alt={van.name || "Van image"} />
                 <h2>{van.name}</h2>
                 <p>${van.price}<span>/day</span></p>
                 <i className={`van-type ${van.type} selected`}>{van.type}</i>
