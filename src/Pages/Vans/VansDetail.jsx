@@ -1,64 +1,70 @@
-import React,{ useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { Link, useParams, useLocation } from 'react-router-dom'
 import { IoMdArrowBack } from "react-icons/io";
-import { useParams } from 'react-router-dom';
-import { useLocation } from 'react-router-dom'
-
 
 function VansDetail() {
-  const [vans, setVans] = useState([])
+  const [van, setVan] = useState(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
 
-const params = useParams()
+  const { id } = useParams()
+  const location = useLocation()
 
-const location = useLocation()
-                        //this is called optional chaining
-const searchParams = location.state?.search || ""
-const type = location.state?.type || "all"
+  const searchParams = location.state?.search || ""
+  const type = location.state?.type || "all"
 
-// const type = new URLSearchParams(searchParams).get('type')
-
-  useEffect(()=>{
-    async function vanDetailing() {
-      const res = await fetch(`https://vanlife-api-8k5o.onrender.com/api/vans/${params.id}`)
-      const data = await res.json()
-      setVans(data)
-      console.log(data.map((item)=>item.name))
+  useEffect(() => {
+    async function fetchVanDetail() {
+      setLoading(true)
+      try {
+        const res = await fetch(`https://vanlife-api-8k5o.onrender.com/api/vans/${id}`)
+        if (!res.ok) {
+          throw new Error('Failed to fetch van details')
+        }
+        const data = await res.json()
+        setVan(data)
+      } catch (err) {
+        setError(err.message)
+      } finally {
+        setLoading(false)
+      }
     }
 
-    vanDetailing()
-  }, [params.id])
+    fetchVanDetail()
+  }, [id])
 
-    const vansElement = vans.map((vanNames)=>{
-      return(
-        <div key={vanNames.id} className="van-detail">
-          <img src={vanNames.imageUrl} alt="" />
-          <i className={`van-type ${vanNames.type} selected`}>{vanNames.type}</i>
-          <h2>{vanNames.name}</h2>
-          <p className='van-price'><span>${vanNames.price}</span>/day</p>
-          <p>{vanNames.description}</p>
-          <button className='link-button'>Rent this van</button>
-      </div>
-      )
-    })
+  if (loading) {
+    return <h2>Loading...</h2>
+  }
+
+  if (error) {
+    return <h2 style={{ color: 'red' }}>{error}</h2>
+  }
+
+  if (!van) {
+    return <h2>No van found</h2>
+  }
 
   return (
-    <div className='van-detail-conatiner'>
-      <Link 
-        to={`..?${searchParams}`} 
+    <div className='van-detail-container'>
+      <Link
+        to={`..?${searchParams}`}
         relative='path'
-        // state={searchParams ? {search: searchParams} : null}
-        style={{display:'flex', alignItems:'center', gap: 10}}>
-        <IoMdArrowBack /> 
-        <p>back to {type} vans</p>
+        style={{ display: 'flex', alignItems: 'center', gap: 10 }}
+      >
+        <IoMdArrowBack />
+        <p>Back to {type} vans</p>
       </Link>
-      {vans.length > 0 ? (<div>
-        {vansElement}
-      </div>): (
-        <h1>Loading...</h1>
-      ) }
+
+      <div className="van-detail">
+        <img src={van.imageUrl} alt={van.name} />
+        <i className={`van-type ${van.type} selected`}>{van.type}</i>
+        <h2>{van.name}</h2>
+        <p className='van-price'><span>${van.price}</span>/day</p>
+        <p>{van.description}</p>
+        <button className='link-button'>Rent this van</button>
+      </div>
     </div>
-
-
   )
 }
 
