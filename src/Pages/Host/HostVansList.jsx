@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-
+import loadingGif from './images/loading.gif'
 function HostVansList() {
   const [van, setVan] = useState([])
 
@@ -46,7 +46,7 @@ function HostVansList() {
           {hostVanEls}
         </section>
         ) : (
-            <p>Loading...</p>
+            <img style={{width: 100}} src={loadingGif} alt='loading the van images' />
         )}
       </div>
     </section>

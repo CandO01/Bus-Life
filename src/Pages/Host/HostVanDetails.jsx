@@ -39,7 +39,7 @@ function HostVanDetails() {
         <Link 
           to='..'
           relative='path'
-          style={{display:'flex', alignItems: 'center', gap: 10}}
+          style={{display:'flex', alignItems: 'center', gap: 10, textDecoration: 'none', color: '#161616'}}
         >
           <IoMdArrowBack />
           <p>back to vans</p>

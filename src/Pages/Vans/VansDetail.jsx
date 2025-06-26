@@ -45,7 +45,7 @@ const type = location.state?.type || "all"
         to={`..?${searchParams}`} 
         relative='path'
         // state={searchParams ? {search: searchParams} : null}
-        style={{display:'flex', alignItems:'center', gap: 10}}>
+        style={{display:'flex', alignItems: 'center', gap: 10, textDecoration: 'none', color: '#161616'}}>
         <IoMdArrowBack /> 
         <p>back to {type} vans</p>
       </Link>

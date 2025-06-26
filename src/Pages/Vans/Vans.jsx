@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useSearchParams } from 'react-router-dom';
+import loadingGif from '../Host/images/loading.gif'
 
 export default function Vans(){
 
@@ -41,7 +42,7 @@ export default function Vans(){
 
      //handling loading
      if(loading){
-      return <h2 aria-live='polite'>Loading</h2>
+      return <img style={{width: 100}} src={loadingGif} alt="waiting for images to load" aria-live='polite' />
      }
 
      //handling errors
@@ -55,7 +56,7 @@ export default function Vans(){
     <div style={{display: 'flex', gap: 10, alignItems: 'center', justifyContent: 'space-evenly'}}>
 
       <button  
-        onClick={()=>setSearchParams({type:"simple"})}
+        onClick={()=>setSearchParams({"type":"simple"})}
         className={`van-type simple ${typeFilter ==='simple' ? 'selected' : ''}`}
       >
           Simple

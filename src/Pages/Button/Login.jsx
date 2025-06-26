@@ -1,14 +1,20 @@
 import React, { useState } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate, Link } from 'react-router-dom'
+
+import { AuthContext } from '../../AuthenticationContext/AuthContext'
 
 function Login() {
   const [loginFormData, setLoginFormData] = useState({ email: "", password: "" })
   const [status, setStatus] = useState('idle')
   const [error, setError] = useState(null)
+  const { login } = React.useContext(AuthContext)
+
   const location = useLocation()
   const navigate = useNavigate()
 
+
   const userMessage = location.state?.message
+  const from = location.state?.from || '/host'
 
   function handleChange(e) {
     const { name, value } = e.target
@@ -21,8 +27,7 @@ function Login() {
   async function handleSubmit(e) {
     e.preventDefault()
     setStatus('submitting')
-    setError(null)
-
+    // setError(null)
     try {
       const res = await fetch('https://vanlife-api-8k5o.onrender.com/login', {
         method: 'POST',
@@ -33,8 +38,9 @@ function Login() {
       const data = await res.json()
 
       if (res.ok) {
+        login()
         console.log('✅ Success:', data)
-        navigate('/host')
+        navigate(from, {replace: true})
       } else {
         console.error('❌ Error:', data.error)
         setError({ message: data.error })
@@ -76,8 +82,8 @@ function Login() {
 
       <p>
         Don't have an account?{' '}
-        <span style={{ color: '#FF8C38', fontWeight: 'bold', cursor: 'pointer' }}>
-          Create one now
+        <span>
+          <Link style={{ color: '#FF8C38', fontWeight: 'bold', cursor: 'pointer', textDecoration: 'none'}} to='/signup'>Sign up now</Link>
         </span>
       </p>
     </div>
