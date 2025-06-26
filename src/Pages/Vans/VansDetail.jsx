@@ -30,7 +30,7 @@ const type = location.state?.type || "all"
 
     const vansElement = 
         <div key={vans.id} className="van-detail">
-          <img src={vans.imageUrl} alt={vans.name} />
+          <img  src={vans.imageUrl} alt={vans.name} />
           <i className={`van-type ${vans.type} selected`}>{vans.type}</i>
           <h2>{vans.name}</h2>
           <p className='van-price'><span>${vans.price}</span>/day</p>

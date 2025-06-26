@@ -19,6 +19,7 @@ import NotFound from './Pages/NotFound.jsx'
 import Login from './Pages/Button/Login.jsx'
 import Auth from './components/Authentication.jsx'
 import Register from './Pages/Button/Register.jsx'
+import HostDashboard from './Pages/Host/HostDashboard/Hostdashboard.jsx'
 
 function App() {
   return (
@@ -49,6 +50,7 @@ function App() {
             </Route>
           </Route>
         </Route>
+        <Route path="host" element={<HostDashboard />} />
         {/* {Page not foound route} */}
         <Route path='*' element={<NotFound />} />
       </Route>

@@ -12,6 +12,8 @@ function Login() {
   const location = useLocation()
   const navigate = useNavigate()
 
+  localStorage.setItem('loggedInUser', loginFormData.email)
+
 
   const userMessage = location.state?.message
   const from = location.state?.from || '/host'
@@ -40,7 +42,9 @@ function Login() {
       if (res.ok) {
         login()
         console.log('✅ Success:', data)
-        navigate(from, {replace: true})
+                                        //to get the email of the user
+        navigate(from, { replace: true, state: { user: loginFormData.email } })
+        // navigate(from, {replace: true})
       } else {
         console.error('❌ Error:', data.error)
         setError({ message: data.error })
