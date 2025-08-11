@@ -20,11 +20,15 @@ import Login from './Pages/Button/Login.jsx'
 import Auth from './components/Authentication.jsx'
 import Register from './Pages/Button/Register.jsx'
 import HostDashboard from './Pages/Host/HostDashboard/Hostdashboard.jsx'
+import Payment from './Pages/Vans/Payment.jsx'
+import PaymentSuccess from './Pages/Vans/paymentSuccess.jsx'
 
 function App() {
   return (
     <Routes>
       <Route path='/' element={<Layouts />}>
+        <Route path='payment' element={<Payment />} />
+        <Route path='payment-success' element={<PaymentSuccess />} />
         <Route index element={<Home />} />
         <Route path="about" element={<About />} />
         <Route path="vans" element={<Vans />} />
@@ -42,6 +46,7 @@ function App() {
             <Route path="income" element={<Income />} />
             <Route path="reviews" element={<Reviews />} />
             <Route path="vans" element={<HostVansList />} />
+            {/* Payment */}
             {/* {VanDetails nested Route} */}
             <Route path="vans/:id" element={<HostVanDetails />}>
               <Route index element={<Details />} />

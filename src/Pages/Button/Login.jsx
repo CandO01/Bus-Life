@@ -7,6 +7,7 @@ function Login() {
   const [loginFormData, setLoginFormData] = useState({ email: "", password: "" })
   const [status, setStatus] = useState('idle')
   const [error, setError] = useState(null)
+  const [message, setMessage] = useState(null)
   const { login } = React.useContext(AuthContext)
 
   const location = useLocation()
@@ -31,7 +32,7 @@ function Login() {
     setStatus('submitting')
     // setError(null)
     try {
-      const res = await fetch('https://vanlife-api-8k5o.onrender.com/login', {
+      const res = await fetch('http://localhost:8254/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(loginFormData),
@@ -41,7 +42,8 @@ function Login() {
 
       if (res.ok) {
         login()
-        console.log('✅ Success:', data)
+        setMessage(data.message)
+        console.log('✅ Success:', data.message)
                                         //to get the email of the user
         navigate(from, { replace: true, state: { user: loginFormData.email } })
         // navigate(from, {replace: true})
@@ -61,7 +63,7 @@ function Login() {
       {userMessage && <h3 style={{ color: 'red' }}>{userMessage}</h3>}
       <h1>Sign into your account</h1>
       {error && <p style={{ color: 'red', fontWeight: 800 }}>{error.message}</p>}
-
+      {message && <p style={{ color: 'green', fontWeight: 800 }}>{message}</p>}
       <form onSubmit={handleSubmit} className='login-form'>
         <input
           type="email"

@@ -180,7 +180,7 @@ footer{
   border-radius: 6px;
 }
 
-.van-container {
+/* .van-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 24px;
@@ -193,7 +193,39 @@ footer{
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   text-align: left;
+  height: 300px; /* pick a uniform height */
+/* } */ */
+
+.van-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 16px;
 }
+
+.inner-div {
+  background: #f3f3f3;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.inner-div img {
+  width: 100%;
+  height: 200px; /* fixed height for images */
+  object-fit: contain; /* keeps full image without cropping */
+}
+
+/*
+.card-content {
+  flex: 1; 
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+*/
+
 
 .inner-div h1, h2 {
     font-size: 22px;
@@ -212,7 +244,7 @@ footer{
 }
 
 .van-type:hover {
-    color: #FFEAD0;
+    color: #272727;
 }
 
 .van-type:focus {
@@ -220,19 +252,23 @@ footer{
 }
 
 .van-type.selected {
-    color: #fff;
+    color: black;
+   font-weight: 600;
 }
 
 .van-type.simple:hover, .van-type.simple.selected {
     background-color: #E17654;
+    color: white;
 }
 
 .van-type.rugged:hover, .van-type.rugged.selected {
     background-color: #115E59;
+    color: white;
 }
 
 .van-type.luxury:hover, .van-type.luxury.selected {
-    background-color: #161616;
+    background-color: red;
+    color: white;
 }
 
 .van-type.clear-filters {
@@ -638,6 +674,102 @@ img.graph {
     color: #ff8c38;
     margin-right: 5px;
 }
+
+/* Payment Page Styling */
+.payment-container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 25px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.payment-container h1 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 25px;
+  font-size: 2rem;
+}
+
+/* Van Summary Section */
+.van-summary {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.van-summary img {
+  width: 200px;
+  border-radius: 12px;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.van-summary h2 {
+  font-size: 1.4rem;
+  color: #444;
+  margin: 5px 0;
+}
+
+.van-summary p {
+  font-size: 1.1rem;
+  color: #555;
+}
+
+/* Payment Form */
+.payment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.payment-form input {
+  padding: 12px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  outline: none;
+  transition: 0.3s;
+}
+
+.payment-form input:focus {
+  border-color: orange;
+  box-shadow: 0 0 5px rgba(59, 130, 246, 0.4);
+}
+
+.payment-form button {
+  padding: 12px;
+  font-size: 1rem;
+  background: orange;
+  color: black;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.3s;
+}
+
+.payment-form button:hover {
+  background: #2563eb;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .payment-container {
+    margin: 20px;
+    padding: 20px;
+  }
+
+  .van-summary img {
+    width: 150px;
+  }
+
+  .payment-container h1 {
+    font-size: 1.6rem;
+  }
+}
+
 @media (max-width: 600px) {
   header {
     flex-direction: row;
@@ -715,4 +847,33 @@ img.graph {
     font-size: 0.9rem;
     padding: 0.65rem 1rem;
   }
+}
+
+@media (min-width: 768px) {
+  .van-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* responsive grid */
+    gap: 16px;
+    margin-top: 20px;
+  }
+  .inner-div h1 {
+    font-size: 18px; /* larger font size for titles */
+  }
+  .inner-div img {
+  width: 100%;
+  height: 200px; /* fixed height for images */
+  object-fit: contain; /* keeps full image without cropping */
+}
+
+  .host-van-single > img,
+  .van-detail-container > img {
+    height: 300px; /* smaller image size for host vans */
+    width: 380px;
+  }
+
+  .van-detail img {
+    border-radius: 5px;
+    margin-block: 47px;
+    width: 400px;
+}
 }

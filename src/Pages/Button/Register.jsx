@@ -1,32 +1,53 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Confetti from 'react-confetti'
 
 export default function Register() {
   const [status, setStatus] = useState("idle");
+  const [message, setMessage] = useState(null);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
+  const [form, setForm] = useState({
+    name: '',
+    phone: '',
+    email: '',
+    password: '',
+    confirm: ''
+  });
+  const navigate = useNavigate()
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setForm(prev => ({ ...prev, [name]: value }));
+  };
 
   async function handleSubmit(e) {
     e.preventDefault();
     setStatus("submitting");
     setError(null);
 
-    const email = e.target.email.value;
-    const password = e.target.password.value;
 
     try {
-      const res = await fetch("https://vanlife-api-8k5o.onrender.com/register", {
+      const res = await fetch("http://localhost:8254/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password })
+        body: JSON.stringify(form)
       });
 
       const data = await res.json();
 
-      if (!res.ok) throw new Error(data.error || "Registration failed");
+      if (!res.ok) throw new Error(data.message || "Registration failed");
 
       setSuccess(true);
+      setMessage(data.message || "✅ Registration successful!");
+      setForm({ name: '', phone: '', email: '', password: '', confirm: '' });
+      setStatus("idle");
+      setTimeout(() => {
+        setSuccess(false);
+        setMessage(null);
+        navigate('/login');
+      }, 5000);
+
     } catch (err) {
       setError(err);
     } finally {
@@ -43,14 +64,45 @@ export default function Register() {
       {success && (
         <>
           <Confetti width={window.innerWidth} height={window.innerHeight} />
-          <p style={{ color: 'green' }}>✅ Registered successfully! Please log in.</p>
+          <p style={{ color: 'green' }}>{message}</p>
         </>
-          )
-      }
+      )}
 
-
-      <input type="email" name="email" placeholder="Email" required />
-      <input type="password" name="password" placeholder="Password" required />
+      <input 
+        type="text" 
+        name="name" 
+        placeholder="Name"
+        value={form.name}
+        onChange={handleChange} 
+        required />
+      <input 
+        type="email" 
+        name="email" 
+        placeholder="Email"
+        value={form.email}
+        onChange={handleChange} 
+        required />
+      <input 
+        type="tel" 
+        name="phone" 
+        placeholder="Phone"
+        value={form.phone}
+        onChange={handleChange} 
+        required />
+      <input 
+        type="password" 
+        name="password" 
+        placeholder="Password"
+        value={form.password}
+        onChange={handleChange} 
+        required />
+      <input 
+        type="password" 
+        name="confirm" 
+        placeholder="Confirm Password"
+        value={form.confirm}
+        onChange={handleChange} 
+        required />
 
       <button type="submit" disabled={status === "submitting"}>
         {status === "submitting" ? "Creating..." : "Sign up"}

@@ -13,7 +13,7 @@ function Dashboard() {
     async function dashboardVans() {
       try {
         setLoading(true)
-        const res = await fetch('https://vanlife-api-8k5o.onrender.com/api/host/vans')
+        const res = await fetch('http://localhost:8254/api/host/vans')
         if(!res.ok){
           throw new Error('Failed to fetch data')
         }

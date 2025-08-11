@@ -1,12 +1,14 @@
 import React,{ useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { IoMdArrowBack } from "react-icons/io";
-import { useParams } from 'react-router-dom';
-import { useLocation } from 'react-router-dom'
+import { useParams , useLocation, useNavigate} from 'react-router-dom';
+
 
 
 function VansDetail() {
   const [vans, setVans] = useState([])
+
+  const navigate = useNavigate()
 
 const params = useParams()
 
@@ -19,7 +21,7 @@ const type = location.state?.type || "all"
 
   useEffect(()=>{
     async function vanDetailing() {
-      const res = await fetch(`https://vanlife-api-8k5o.onrender.com/api/vans/${params.id}`)
+      const res = await fetch(`http://localhost:8254/api/vans/${params.id}`)
       const data = await res.json()
       setVans(data)
     }
@@ -35,7 +37,19 @@ const type = location.state?.type || "all"
           <h2>{vans.name}</h2>
           <p className='van-price'><span>${vans.price}</span>/day</p>
           <p>{vans.description}</p>
-          <button className='link-button'>Rent this van</button>
+          <button 
+            className='link-button'
+            onClick={() => navigate('/payment', { 
+                      state: { 
+                        id: vans.id,
+                        price: vans.price, 
+                        name: vans.name,
+                        imageUrl: vans.imageUrl 
+                      } 
+                    })}
+          >
+            Rent this van
+          </button>
       </div>
      
 
