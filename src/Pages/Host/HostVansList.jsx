@@ -7,7 +7,7 @@ function HostVansList() {
   useEffect(()=>{
     async function vanList() {
       try{
-        const res = await fetch(`http://localhost:8254/api/host/vans`)
+        const res = await fetch(`https://vanlife-api-8k5o.onrender.com/api/host/vans`)
         if(!res.ok){
           throw new Error('Fetch failed')
         }

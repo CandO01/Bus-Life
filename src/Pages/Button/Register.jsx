@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Confetti from 'react-confetti'
+import { AuthContext } from '../../AuthenticationContext/AuthContext';
 
 export default function Register() {
+  const { login } = React.useContext(AuthContext);
   const [status, setStatus] = useState("idle");
   const [message, setMessage] = useState(null);
   const [error, setError] = useState(null);
@@ -28,20 +30,33 @@ export default function Register() {
 
 
     try {
-      const res = await fetch("http://localhost:8254/signup", {
+      const res = await fetch("https://vanlife-api-8k5o.onrender.com/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form)
       });
 
       const data = await res.json();
+      console.log(data.user);
+      
 
       if (!res.ok) throw new Error(data.message || "Registration failed");
 
       setSuccess(true);
       setMessage(data.message || "✅ Registration successful!");
       setForm({ name: '', phone: '', email: '', password: '', confirm: '' });
-      setStatus("idle");
+      setStatus("done");
+
+      //Login user
+      const { user } = data
+      login(
+        { 
+          name: user.user, 
+          email: user.email, 
+          phone: user.phone 
+        }
+      );
+
       setTimeout(() => {
         setSuccess(false);
         setMessage(null);

@@ -10,7 +10,7 @@ function Payment() {
 
   const payWithFlutterwave = async (e) => {
     e.preventDefault();
-    const res = await fetch('http://localhost:8254/api/flutterwave/init', {
+    const res = await fetch('https://vanlife-api-8k5o.onrender.com/api/flutterwave/init', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, vanId: id })

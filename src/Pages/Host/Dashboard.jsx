@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { BsStarFill } from "react-icons/bs"
 import loadingGif from './images/loading.gif'
+import { AuthContext } from '../../AuthenticationContext/AuthContext'
 
 function Dashboard() {
+  const { user } = React.useContext(AuthContext);
   const [vans, setVans] = useState([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
@@ -13,7 +15,7 @@ function Dashboard() {
     async function dashboardVans() {
       try {
         setLoading(true)
-        const res = await fetch('http://localhost:8254/api/host/vans')
+        const res = await fetch('https://vanlife-api-8k5o.onrender.com/api/host/vans')
         if(!res.ok){
           throw new Error('Failed to fetch data')
         }
@@ -52,7 +54,7 @@ function Dashboard() {
           <>
               <section className="host-dashboard-earnings">
                 <div className="info">
-                    <h1>Welcome!</h1>
+                    <h1>Welcome {user}!</h1>
                     <p>Income last <span>30 days</span></p>
                     <h2>$2,260</h2>
                 </div>

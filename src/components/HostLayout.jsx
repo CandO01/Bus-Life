@@ -1,7 +1,8 @@
-import React from 'react'
-import { NavLink, Outlet, useLocation } from 'react-router-dom'
-
+import React, { useContext } from 'react'
+import { NavLink, Outlet } from 'react-router-dom';
+import { AuthContext } from '../AuthenticationContext/AuthContext';
 function HostLayout() {
+  const { user } = useContext(AuthContext);
   const activeStyles = {
     fontWeight: "bold",
     textDecoration: "underline",
@@ -9,12 +10,11 @@ function HostLayout() {
   }
 
   // Get user email from location or localStorage
-  const location = useLocation()
-  const user = location.state?.user || localStorage.getItem('loggedInUser')
+  // const location = useLocation()
 
   return (
     <>
-      {/* 👋 Welcome Message */}
+      {/* 👋 Welcome Message
       {user && (
         <div style={{
           backgroundColor: '#f1f1f1',
@@ -23,9 +23,9 @@ function HostLayout() {
           textAlign: 'center',
           fontWeight: 'bold'
         }}>
-          👋 Welcome, {user}!
+          👋 Hi, {user}!
         </div>
-      )}
+      )} */}
 
       {/* Host Navigation */}
       <nav className='host-nav'>

@@ -12,7 +12,7 @@ function PaymentSuccess() {
 
     if (status === 'successful' && transactionId) {
       // Call backend to verify
-      fetch(`http://localhost:8254/api/flutterwave/verify/${transactionId}`)
+      fetch(`https://vanlife-api-8k5o.onrender.com/api/flutterwave/verify/${transactionId}`)
         .then(res => res.json())
         .then(data => {
           if (data.status === 'success') {

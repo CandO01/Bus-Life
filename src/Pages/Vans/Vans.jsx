@@ -18,7 +18,7 @@ export default function Vans(){
       async function vansDataLife() {
         setLoading(true)
         try {
-        const res = await fetch('http://localhost:8254/api/vans');
+        const res = await fetch('https://vanlife-api-8k5o.onrender.com/api/vans');
         if (!res.ok){
           throw {
             message: "Failed to fetch vans", 
